@@ -11,7 +11,7 @@ jobs:
         run: docker build . -t kodega/react-test -f Dockerfile.dev
 
       - name: run test cases
-        run: docker run kodega/react-test npm run test -- --coverage
+        run: docker run -e CI=true kodega/react-test npm run test -- --coverage
   deploy:
     runs-on: ubuntu-latest
     needs: run-test-cases
