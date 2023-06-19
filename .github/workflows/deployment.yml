@@ -1,0 +1,14 @@
+name: Deploy to GitHub Pages
+on: [push]
+jobs:
+  run-test-cases:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v2
+
+      - name: build docker image
+        run: docker build . -t kodega/react-test -f Dockerfile.dev
+
+      - name: run test cases
+        run: docker run kodega/react-test npm run test -- --coverage
